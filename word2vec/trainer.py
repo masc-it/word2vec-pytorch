@@ -39,6 +39,7 @@ class Word2VecTrainer:
                 optimizer, len(self.dataloader))
 
             running_loss = 0.0
+            i = 0
             with tqdm(self.dataloader) as pbar:
                 for sample_batched in pbar:
 
@@ -53,8 +54,9 @@ class Word2VecTrainer:
                         loss.backward()
                         optimizer.step()
                         scheduler.step()
-                        running_loss = running_loss * 0.9 + loss.item() * 0.1
-                        pbar.set_postfix({"loss": running_loss})
+                        running_loss += loss.item()
+                        i += 1
+                        pbar.set_postfix({"loss": running_loss/i})
 
             self.skip_gram_model.save_embedding(
                 self.data.id2word, self.output_file_name)
