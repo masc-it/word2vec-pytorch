@@ -41,6 +41,7 @@ class Word2VecTrainer:
             running_loss = 0.0
             i = 0
             with tqdm(self.dataloader) as pbar:
+                pbar.set_description(f"Epoch {iteration+1}")
                 for sample_batched in pbar:
 
                     if len(sample_batched[0]) > 1:
