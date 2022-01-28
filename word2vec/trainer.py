@@ -39,7 +39,7 @@ class Word2VecTrainer:
                 optimizer, len(self.dataloader))
 
             running_loss = 0.0
-            with tqdm.tqdm(self.dataloader) as pbar:
+            with tqdm(self.dataloader) as pbar:
                 for i, sample_batched in pbar:
 
                     if len(sample_batched[0]) > 1:
